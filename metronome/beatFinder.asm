@@ -38,17 +38,28 @@ call stoptimer
 jmp loop
 
 starttimer:
-mov th0, #0fch
+mov th0, #0ffh
+mov tl0, #00h
 setb tr0; start timer0
 mov r6, #01h
 ret
 
 stoptimer:
-clr tr0 ; strop timer0
+clr tr0 ; stop timer0
+cjne r4, #05h, incrementDivider
+mov A, r5
+mov B, r4
+div AB
+; hier springt der irgendwie ständig rein
+ret
+
+incrementDivider:
+inc r4
 mov r6, #00h
 ret
 
 timer:
 inc r5
-mov th0, #0fch
+mov th0, #0ffh
+mov tl0, #00h
 ret
