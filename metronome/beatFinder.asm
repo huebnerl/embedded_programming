@@ -4,7 +4,6 @@
 cseg at 0h
 ajmp init
 cseg at 100h
-EIN1 EQU 20H
 
 ; -----------------
 ; Interrupt
@@ -19,6 +18,8 @@ reti
 init:
 mov IE, #10000010b
 mov P0, #0fh
+mov TMOD, #02h
+mov th0, #0EFh
 
 loop:
 mov P0, #0fh
@@ -38,28 +39,25 @@ call stoptimer
 jmp loop
 
 starttimer:
-mov th0, #0ffh
-mov tl0, #00h
 setb tr0; start timer0
+mov tl0, th0
 mov r6, #01h
 ret
 
 stoptimer:
 clr tr0 ; stop timer0
-cjne r4, #05h, incrementDivider
+mov r6, #00h
+cjne r4, #04h, incrementDivider
+inc r4
 mov A, r5
 mov B, r4
 div AB
-; hier springt der irgendwie ständig rein
 ret
 
 incrementDivider:
 inc r4
-mov r6, #00h
 ret
 
 timer:
 inc r5
-mov th0, #0ffh
-mov tl0, #00h
 ret
