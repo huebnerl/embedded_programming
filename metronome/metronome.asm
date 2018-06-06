@@ -32,14 +32,20 @@ mov TMOD, #00100010b
 mov tickState, #0f0h
 mov timerValue, #0eah
 mov tickCounter, #00h
-mov maxTickCount, #03h 	; default init
+mov maxTickCount, #03h 	; default
 
+; init ports we use
 mov P0, #0fh
-mov th0, timerValue
-
 mov P2, #00h
 mov P3, #0ffh
 
+; init auto reload values
+mov th0, timerValue
+mov th1, timerValue
+
+; -----------------
+; Recording section
+; -----------------
 loop:
 mov P0, #0fh
 mov r7, P0
@@ -57,8 +63,8 @@ cjne r6, #01h, loop
 jmp stoprectimer
 
 startrectimer:
-setb tr0; start timer0
 mov tl0, th0
+setb tr0 ; start timer0
 mov r6, #01h
 ret
 
@@ -81,15 +87,16 @@ rectimer:
 inc r5
 ret
 
-; diplaysection starts here
+; -----------------
+; Display section
+; -----------------
 displaySection:
 call starttimer
 displayLoop:
 jmp displayLoop
 
 starttimer:
-mov tl1, timerValue
-mov th1, timerValue ; Auto reloads from here.
+mov tl1, th1
 setb tr1
 ret
 
@@ -97,20 +104,20 @@ stoptimer:
 ret
 
 timer:
-mov P2, tickState
-inc tickCounter
+mov P2, tickState	; tickState is used as a bitmap indicating the columns to light up
+inc tickCounter		; increment tickCounter
 
 clr c
 mov A, maxTickCount
-subb A, tickCounter
+subb A, tickCounter	; subtract current tickCounter from maxTickCount to check whether it needs to be reset
 jnz keep
-call resetTickCounter
+call resetTickCounter	; reset the tick counter when the difference is 0
 keep:
 ret
 
 resetTickCounter:
-mov tickCounter, #00h
-mov A, tickState
+mov tickCounter, #00h	; set tickCounter to 0
+mov A, tickState	; swap tickState by inverting the bits
 cpl A
 mov tickState, A
 ret
