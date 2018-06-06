@@ -1,6 +1,5 @@
-; Metronome with function tab for beet
+; Metronome with function to tap for beat
 
-; initialisierung
 cseg at 0h
 ajmp init
 cseg at 100h
@@ -11,8 +10,9 @@ tickState EQU R2
 timerValue EQU R3
 
 ; -----------------
-; Interrupt
+; Interrupts
 ;------------------
+; Timer0 Interrupt
 ORG 0bh
 call rectimer
 reti
@@ -26,20 +26,19 @@ reti
 ; Init
 ; -----------------
 init:
+mov IE, #10001010b
+mov TMOD, #00100010b
+
 mov tickState, #0f0h
 mov timerValue, #0eah
 mov tickCounter, #00h
 mov maxTickCount, #03h 	; default init
 
-mov IE, #10001010b
-mov TMOD, #00100010b
 mov P0, #0fh
 mov th0, timerValue
 
 mov P2, #00h
 mov P3, #0ffh
-mov DPTR, #table
-
 
 loop:
 mov P0, #0fh
@@ -115,11 +114,3 @@ mov A, tickState
 cpl A
 mov tickState, A
 ret
-
-; ------------------------------------
-org 300h
-table:
-db 11110000b, 11111111b
-db 00001111b, 11111111b
-
-end
