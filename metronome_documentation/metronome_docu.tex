@@ -15,16 +15,52 @@
 
 \makeatletter
 
+\def \autoren {Felix Starke, Lars Hübner}
+\def \titel {Metronom für Intel 8051}
+\def \arbeit {Projekt Systemnahe Programmierung}
+\def \uni {DHBW Karlsruhe}
+\def \betreuer {Herr Lausen}
+\def \datum {6. Juni 2018}
 
+\title{\titel}
+\author{\autoren}
+\date{\datum}
 
-\title{Metronome on Intel 8051}
-\author{Felix Starke, Lars Hübner}
-\date{6. Juni 2018}
-
-\ihead{Metronome - Intel 8051}
-\ohead{Felix Starke, Lars Hübner}
+\ihead{\titel}
+\ohead{\autoren}
 \ofoot{\pagemark}
 
 \begin{document}
-Hier ein bischen text
+
+\begin{titlepage}
+	\centering
+	\includegraphics[width=0.4\textwidth]{dhbw.png}\par\vspace{1cm}
+	{\scshape\LARGE \uni \par}
+	\vspace{1cm}
+	{\scshape\Large \arbeit\par}
+	\vspace{1.5cm}
+	{\huge\bfseries \titel\par}
+	\vspace{2cm}
+	{\Large\itshape \autoren\par}
+	\vfill
+	betreut von\par
+	\textsc{\betreuer}
+
+	\vfill
+
+% Bottom of the page
+	{\large \datum\par}
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Einleitung}
+\section{Grundlagen}
+\section{Konzept}
+\section{Besondere Schwierigkeiten}
+\section{Zusammenfassung}
+\section{Literatur}
+\section{Eidesstattliche Versicherung}
 \end{document}
