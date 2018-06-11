@@ -8,7 +8,9 @@
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{hyperref}
+\usepackage{xcolor}
 
+\input{listings.tex}
 \usepackage{tikz}
 \usetikzlibrary{positioning,calc,shapes,arrows,shapes.multipart}
 
@@ -107,9 +109,52 @@ Für die Ausgabe des ermittelten Taktes wird eine 8x8 LED-Matrix (siehe \autoref
 \label{fig:led}
 \end{figure}
 \subsection{Programmablauf}
-
+Das Programm besteht wie beschrieben aus zwei Teilen. Im ersten Schritt wird zunächst der Takt ermittelt um diesen dann im zweiten Teil des Programms zu visualisieren.
+\\
+\\
+Programmteil 1 besteht damit aus einer Schleife, die solange Zeitmessungen durchführt bis 3 Messungen vorhanden sind. Diese Schleife startet mit dem ersten Tastendruck auf das Keypad. Eine Messung ermittelt die Zeitspanne zwischen zwei Tastendrücken. 
+\\
+Nach dem genug Messungen durchgeführt wurden, kann die Summe der Zeitspannen durch die Anzahl (hier 3) geteilt werden, um so den mittleren Takt zu ermitteln. Diese Mittelwertrechnung ist deshalb wichtig, da der Mensch seinen Takt beim Drücken der Taste nicht konstant halten kann und so geringen Ungenauigkeiten entstehen.
+\\
+\\
+Durch die Mittelwertberechnung kann der Takt einfach gemittelt werden, um möglichst nah an den tatsächlichen Takt ran zu kommen. In \autoref{fig:pgmAblauf} ist der Programmablauf aus Programmteil 1 gezeigt.
+\\
+\\
 % Include flow chart definition
 \include{flow_diagram_definition}
+In Programmteil 2 kann der ermittelte Durchschnittswert genutzt werden, um den Takt mit Hilfe eines Timers auf der LED-Matrix zu visualisieren. Zur Visualisierung blinkt abwechselnd die linke und die rechte Hälfte der LED-Matrix auf. Dieses hin und her wechseln der Seiten erinnert somit an ein gewöhnliches Metronom.
+\\  
+Der Timerüberlauf wird zur Takterzeugung auf den in Teil 1 verwendeten Timerüberlauf gesetzt. Mit jedem Überlauf des Timers wird ein entsprechender Interrupt geworfen, welcher von einer Interruptrutiene (siehe timer function im asm-code) gefangen wird und eine passende visuelle Änderung auf der LED-Matrix veranlasst.
+\\
+\\
+Wie in \autoref{lst:timer} gezeigt wird eine Art Bitmap eingeführt, welche als Indikator dafür dient, welche Spalten aufleuchten sollen. P2 (Port 2) ist mit der LED-Matrix verbinden und sorgt für die Ausgabe. Anschließend muss geprüft werden, ob bereits die in Teil 1 ermittelte Zeitspanne (in Anzahl Überläufen) abgelaufen ist. Um dies zu ermitteln wird der aktuelle tickCounter vom maxTickCounter (in Teil 1 ermittelt) abgezogen. Sobald des Ergebnis "0" erreicht muss der Zähler zurückgesetzt werden.
+\\
+Beim zurücksetzen wird zusätzlich mit "cpl A" die Bitmap zur Visualisierung bitweise invertiert um so die leuchtende Seite der LED-Matrix zu ändern.
+
+\begin{figure}
+\begin{lstlisting}
+timer:
+mov P2, tickState	
+inc tickCounter		
+
+clr c
+mov A, maxTickCount
+subb A, tickCounter	
+jnz keep
+call resetTickCounter	
+keep:
+ret
+
+resetTickCounter:
+mov tickCounter, #00h	
+mov A, tickState	
+cpl A
+mov tickState, A
+ret
+\end{lstlisting}
+\caption{Interruptrutiene}
+\label{lst:timer}
+\end{figure}
 
 \section{Besondere Schwierigkeiten}
 Besondere Schwierigkeiten ergaben sich aufgrund der hohen Laufzeiten durch die Entwicklungsumgebung. Vorallem die Nutzung virtueller Hardware verlangsamt den Ablauf des Programms stark. So vergehen, auf einem recht leistungsstarken Rechner, etwa 7 Sekunden, bis im Simulator der Entwicklungsumgebung eine Millisekunde verstrichen ist. Da gutes Timing für ein Metronom sehr wichtig ist, musste entschieden werden, wie mit der langsamen Laufzeit umgegangen werden sollte. Da das Metronom nutzbar sein sollte wurde das Timing nicht an der simulierten Laufzeit der Entwicklungsumgebung orientiert. Da weder die Eingabe zur Festlegung des Taktes noch die Ausgabe des Takts über die LED-Matrix an die Zeit der Simulation gebunden sind, ist es einfach möglich, beides zu synchronisieren und so umzusetzten, dass das Metronom nutzbar ist.

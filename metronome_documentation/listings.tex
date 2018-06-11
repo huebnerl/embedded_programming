@@ -1,0 +1,59 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Listings
+%
+% TODO:
+%  - aufräumen
+%  - besser strukturieren
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{darkgray}{rgb}{0.4, 0.4, 0.4}
+%\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{editorGray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{editorOcher}{rgb}{1, 0.5, 0} % #FF7F00 -> rgb(239, 169, 0)
+\definecolor{editorGreen}{rgb}{0, 0.5, 0} % #007C00 -> rgb(0, 124, 0)
+\definecolor{green}{rgb}{0, 0.8, 0}
+\definecolor{orange}{rgb}{1,0.45,0.13}
+\definecolor{olive}{rgb}{0.17,0.59,0.20}
+\definecolor{brown}{rgb}{0.69,0.31,0.31}
+\definecolor{purple}{rgb}{0.38,0.18,0.81}
+\definecolor{lightblue}{rgb}{0.1,0.57,0.7}
+\definecolor{lightred}{rgb}{1,0.4,0.5}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+
+% Default style for listings
+\lstset{
+  backgroundcolor=\color{editorGray},
+  basicstyle={\footnotesize\ttfamily},
+  breakatwhitespace=true,
+  breaklines=true,   % sets automatic line breaking
+  captionpos=b,      % sets the caption-position to bottom
+  keepspaces=true,   % keeps spaces in text, useful for keeping indentation
+  					 % of code (possibly needs columns=flexible)
+  showspaces=false,  % show spaces everywhere adding particular underscores;
+  					 % it overrides 'showstringspaces'
+  showstringspaces=false, % underline spaces within strings only
+  showtabs=false,         % show tabs within strings adding particular underscores
+  tabsize=2,	          % sets default tabsize to 2 spaces
+  rulecolor=\color{darkgray},   % if not set, the frame-color may be changed on
+  								% line-breaks within not-black text
+  								% (e.g. comments (green here))
+  %numberstyle=\tiny\color{black}, % the style that is used for the line-numbers
+  frame=tb,
+  % line-numbers
+  numbersep=5pt,     % how far the line-numbers are from the code
+  stepnumber=1,
+  firstnumber=1,
+  numberfirstline=true,
+  %xleftmargin={0.75cm},
+  numbers=left,      % where to put the line-numbers; possible
+  					 % values are (none, left, right)
+  identifierstyle=\color{black},
+  keywordstyle=\color{blue},
+  stringstyle=\color{editorOcher},
+  commentstyle=\color{brown}
+}
