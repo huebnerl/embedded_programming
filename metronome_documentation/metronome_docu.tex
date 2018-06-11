@@ -1,4 +1,4 @@
-\documentclass[a4paper, 10pt]{scrartcl}
+\documentclass[a4paper, 12pt]{scrartcl}
 
 \usepackage{a4wide}
 \usepackage[utf8]{inputenc}
@@ -67,16 +67,27 @@ Ein Metronom beschreibt ein mechanisches oder elektronisches Gerät, welches zur
 Da Metronome häufig als kleine portable Geräte mit geringem Stromverbrauch umgesetzt werden, kann eine entsprechende Funktionalität auf einem Intel 8051 Mikrocontroller implementiert werden. Die Programmierung auf diesem Mikrocomputer geschieht in Assembler. Ziel dieses Projektes ist entsprechend die Implementierung einer solchen "Tap to Beat" Funktion in Assembler für den 8051.
 
 \subsection{Aufgabenstellung}
-
+Aus diesen Anforderungen ergibt sich die folgende Aufgabenstellung.
+\\
+Das Programm muss eine Funktionalität implementieren, die das Aufnehmen des Taktes über eine Eingabehardware ermöglicht. Außerdem muss das Ausgeben des Taktes über eine passende Ausgabehardware implementiert werden.
+Das gesamte Programm lässt sich damit in zwei große Teile splitten, dass Recording und das Anzeigen des Taktes.
+\\
+\\
 \textbf{Recording}
 \\
+Die Aufnahme des Taktes muss über eine Eingabehardware getätigt werden. In diesem Projekt wurde eine Keypad-Matrix mit Tasten als Eingabe gewählt. Über eine dieser Tasten soll nun der Takt gemessen werden. Hierzu wird jeweils die Zeitspanne zwischen zwei Tastendrücken mithilfe eines Timers gemessen. Die Messungen sollen im Anschluss auf summiert und am Ende durch die Anzahl der Messungen geteilt werden, um den Mittelwert zu erhalten.
+\\
+\\
 \textbf{Display Metronom}
-
+\\
+Nachdem der durchschnittliche Takt gemessen und ermittelt wurde, gilt es diesen auf einem Ausgabemedium anzuzeigen. Anstelle einer Tonausgabe wird in dieser Implementierung eine LED-Matrix genutzt um den Takt zu visualisieren.
+\newpage
 \section{Grundlagen}
 \subsection{Assembler}
 \subsection{Intel 8051 Mikrocontroller}
 \subsection{Entwicklungsumgebung MCU-8051}
 
+\newpage
 \section{Konzept}
 \subsection{Eingaben, Ausgaben und Ports}
 Um dem Metronom den Takt vorzugeben, kommt eine 4x4 Keypad-Matrix (siehe \autoref{fig:keypad}) zur Eingabe zum Einsatz. Diese ist an alle acht Pins von Port 0 angeschlossen. Dabei werden die Pins 0-3 für die vier Spalten der Matrix und Pins 4-7 für die Zeilen der Matrix verwendet. Um eine gedrückte Teste zu detektieren müssen zunächst die Pins 0-3 auf "1" gesetzt werden und die Pins 4-7 gelesen werden. So lässt sich herausfinden, ob überhaupt eine Taste gedrückt ist und welcher Spalte diese angehört. Im nächsten Takt können dann die Pins 4-7 auf "1" gesetzt werden und 0-3 auf "0". Anschließend kann die Zeile der gedrückten Taste ermittelt werden.
