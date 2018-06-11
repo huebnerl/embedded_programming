@@ -27,8 +27,8 @@
 
 \makeatletter
 
-\def \autorenWithMatr {Felix Starke (Matr.: )\\
- Lars Hübner (Matr.: 5485901)} % MATRIKELNUMMER
+\def \autorenWithMatr {Felix Starke (Matr.: 4567345)\\
+ Lars Hübner (Matr.: 5485901)}
 \def \autoren {Felix Starke, Lars Hübner}
 \def \titel {Metronom für Intel 8051}
 \def \arbeit {Projekt Systemnahe Programmierung}
@@ -75,13 +75,13 @@
 \subsection{Motivation}
 Ein Metronom beschreibt ein mechanisches oder elektronisches Gerät, welches zur regelmäßigen Tonerzeugung genutzt wird um musikalische Rhythmen zu unterstützen. Die Mehrzahl der neueren Metronome haben eine Funktion, bei der über ein regelmäßiges Klicken auf einen Button der entsprechende Klick-Takt übernommen wird.
 \\
-Da Metronome häufig als kleine portable Geräte mit geringem Stromverbrauch umgesetzt werden, kann eine entsprechende Funktionalität auf einem Intel 8051 Mikrocontroller implementiert werden. Die Programmierung auf diesem Mikrocomputer geschieht in Assembler. Ziel dieses Projektes ist entsprechend die Implementierung einer solchen "Tap to Beat" Funktion in Assembler für den 8051.
+Da Metronome häufig als kleine portable Geräte mit geringem Stromverbrauch umgesetzt werden, kann eine entsprechende Funktionalität auf einem Intel 8051 Mikrocontroller implementiert werden. Die Programmierung auf diesem Mikrocomputer geschieht in Assembler. Ziel dieses Projektes ist entsprechend die Implementierung einer solchen $"$Tap to Beat$"$ Funktion in Assembler für den 8051.
 
 \subsection{Aufgabenstellung}
 Aus diesen Anforderungen ergibt sich die folgende Aufgabenstellung.
 \\
 Das Programm muss eine Funktionalität implementieren, die das Aufnehmen des Taktes über eine Eingabehardware ermöglicht. Außerdem muss das Ausgeben des Taktes über eine passende Ausgabehardware implementiert werden.
-Das gesamte Programm lässt sich damit in zwei große Teile splitten, dass Recording und das Anzeigen des Taktes.
+Das gesamte Programm lässt sich damit in zwei große Teile aufteilen, das Recording und das Anzeigen des Taktes.
 \\
 \\
 \textbf{Recording}
@@ -98,7 +98,7 @@ Nachdem der durchschnittliche Takt gemessen und ermittelt wurde, gilt es diesen 
 Assembler ist eine maschinenorientierte Programmiersprache, welche auf einem prozessorspezifischen Befehlssatz basiert. Die Sprache wird als Programmiersprache der zweiten Generation bezeichnet, da es nicht mehr notwendig ist, die Befehle als Binärcode zu schreiben. Statt dessen ist es möglich tatsächliche Befehle in Textform, wie zum Beispiel $"$ADD Op1, Op2$"$ zu verwenden. Assembler wird anschließend mit einem Assemblierer in den tatsächlichen Maschinencode übersetzt, welchen dann vom Prozessor ausgeführt wird.
 
 \subsection{Intel 8051 Mikrocontroller}
-Der Intel 8051 Mikrocontroller ist einer der am weitesten verbreiteten Mikrocontroller. Der 8051 ist ein 8-bit Mikrocontroller und kommt in verschiedensten Gebieten zum Einsatz. Dazu gehören beispielsweise die Automobilindustrie oder Anwendungen in der Robotik oder Telekommunikation. Er verfügt unter anderem über 4 KB Programmspeicher, 128 Byte Datenspeicher und zwei 16-Bit Timern. Des Weiteren existieren noch Varianten des Prozessors, die über besondere Komponenten wie beispielsweise UART verfügen und den Mikrocontroller entsprechend noch leistungsfähiger machen.
+Der Intel 8051 Mikrocontroller ist einer der am weitesten verbreiteten Mikrocontroller. Der 8051 ist ein 8-bit Mikrocontroller und kommt in verschiedensten Gebieten zum Einsatz. Dazu gehören beispielsweise die Automobilindustrie oder Anwendungen in der Robotik oder Telekommunikation. Er verfügt unter anderem über 4 KB Programmspeicher, 128 Byte Datenspeicher und zwei 16-Bit Timer. Des Weiteren existieren noch Varianten des Prozessors, die über besondere Komponenten wie beispielsweise UART verfügen und den Mikrocontroller entsprechend noch leistungsfähiger machen.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.7\textwidth]{8051.jpg}
@@ -119,7 +119,7 @@ Um eine einfachere und schnellere Entwicklung des Programmcodes zu ermöglichen 
 \newpage
 \section{Konzept}
 \subsection{Eingaben, Ausgaben und Ports}
-Um dem Metronom den Takt vorzugeben, kommt eine 4x4 Keypad-Matrix (siehe \autoref{fig:keypad}) zur Eingabe zum Einsatz. Diese ist an alle acht Pins von Port 0 angeschlossen. Dabei werden die Pins 0-3 für die vier Spalten der Matrix und Pins 4-7 für die Zeilen der Matrix verwendet. Um eine gedrückte Teste zu detektieren müssen zunächst die Pins 0-3 auf "1" gesetzt werden und die Pins 4-7 gelesen werden. So lässt sich herausfinden, ob überhaupt eine Taste gedrückt ist und welcher Spalte diese angehört. Im nächsten Takt können dann die Pins 4-7 auf "1" gesetzt werden und 0-3 auf "0". Anschließend kann die Zeile der gedrückten Taste ermittelt werden.
+Um dem Metronom den Takt vorzugeben, kommt eine 4x4 Keypad-Matrix (siehe \autoref{fig:keypad}) zur Eingabe zum Einsatz. Diese ist an alle acht Pins von Port 0 angeschlossen. Dabei werden die Pins 0-3 für die vier Spalten der Matrix und Pins 4-7 für die Zeilen der Matrix verwendet. Um eine gedrückte Teste zu detektieren müssen zunächst die Pins 0-3 auf $"$1$"$ gesetzt werden und die Pins 4-7 gelesen werden. So lässt sich herausfinden, ob überhaupt eine Taste gedrückt ist und welcher Spalte diese angehört. Im nächsten Takt können dann die Pins 4-7 auf $"$1$"$ gesetzt werden und 0-3 auf $"$0$"$. Anschließend kann die Zeile der gedrückten Taste ermittelt werden.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.5\textwidth]{keypad.png}
@@ -141,19 +141,20 @@ Das Programm besteht wie beschrieben aus zwei Teilen. Im ersten Schritt wird zun
 \\
 Programmteil 1 besteht damit aus einer Schleife, die solange Zeitmessungen durchführt bis 3 Messungen vorhanden sind. Diese Schleife startet mit dem ersten Tastendruck auf das Keypad. Eine Messung ermittelt die Zeitspanne zwischen zwei Tastendrücken. 
 \\
-Nach dem genug Messungen durchgeführt wurden, kann die Summe der Zeitspannen durch die Anzahl (hier 3) geteilt werden, um so den mittleren Takt zu ermitteln. Diese Mittelwertrechnung ist deshalb wichtig, da der Mensch seinen Takt beim Drücken der Taste nicht konstant halten kann und so geringen Ungenauigkeiten entstehen.
+Nachdem genug Messungen durchgeführt wurden, kann die Summe der Zeitspannen durch die Anzahl (hier 3) geteilt werden, um so den mittleren Takt zu ermitteln. Diese Mittelwertrechnung ist deshalb wichtig, da der Mensch seinen Takt beim Drücken der Taste nicht konstant halten kann und so geringe Ungenauigkeiten entstehen.
 \\
-Durch die Mittelwertberechnung kann der Takt einfach gemittelt werden, um möglichst nah an den tatsächlichen Takt ran zu kommen. In \autoref{fig:pgmAblauf} ist der Programmablauf aus Programmteil 1 gezeigt.
+Durch die Mittelwertberechnung kann der Takt einfach gemittelt werden, um möglichst nah an den tatsächlichen Takt heran zu kommen. In \autoref{fig:pgmAblauf} ist der Programmablauf aus Programmteil 1 gezeigt.
 % Include flow chart definition
 \include{flow_diagram_definition}
+
 In Programmteil 2 kann der ermittelte Durchschnittswert genutzt werden, um den Takt mit Hilfe eines Timers auf der LED-Matrix zu visualisieren. Zur Visualisierung blinkt abwechselnd die linke und die rechte Hälfte der LED-Matrix auf. Dieses hin und her wechseln der Seiten erinnert somit an ein gewöhnliches Metronom. Hierbei ist zu vermerken, dass die Routine zum Zeichnen auf der LED-Matrix stark vereinfacht wurde, um den Geschwindigkeitsanforderungen gerecht zu werden und das Metronom trotz Simulation und virtueller Hardware nutzbar zu machen. In \autoref{schwierigkeiten} wird beschrieben, warum diese Schwierigkeit vorliegt und wie damit umgegangen wird.
 \\  
-Der Timerüberlauf wird zur Takterzeugung auf den in Teil 1 verwendeten Timerüberlauf gesetzt. Mit jedem Überlauf des Timers wird ein entsprechender Interrupt geworfen, welcher von einer Interruptrutiene (siehe timer function im asm-code) gefangen wird und eine passende visuelle Änderung auf der LED-Matrix veranlasst.
+Der Timerüberlauf wird zur Takterzeugung auf den in Teil 1 verwendeten Timerüberlauf gesetzt. Mit jedem Überlauf des Timers wird ein entsprechender Interrupt ausgelöst, worauf eine Interruptroutine (siehe timer function im asm-code) ausgeführt wird und eine passende visuelle Änderung auf der LED-Matrix veranlasst.
 \\
 \\
-Wie in \autoref{lst:timer} gezeigt wird eine Art Bitmap eingeführt, welche als Indikator dafür dient, welche Spalten aufleuchten sollen. P2 (Port 2) ist mit der LED-Matrix verbinden und sorgt für die Ausgabe. Anschließend muss geprüft werden, ob bereits die in Teil 1 ermittelte Zeitspanne (in Anzahl Überläufen) abgelaufen ist. Um dies zu ermitteln wird der aktuelle tickCounter vom maxTickCounter (in Teil 1 ermittelt) abgezogen. Sobald des Ergebnis "0" erreicht muss der Zähler zurückgesetzt werden.
+Wie in \autoref{lst:timer} gezeigt wird eine Art Bitmap eingeführt, welche als Indikator dafür dient, welche Spalten aufleuchten sollen. P2 (Port 2) ist mit der LED-Matrix verbunden und sorgt für die Ausgabe. Anschließend muss geprüft werden, ob bereits die in Teil 1 ermittelte Zeitspanne (in Anzahl Überläufen) abgelaufen ist. Um dies zu ermitteln wird der aktuelle \emph{tickCounter} vom \emph{maxTickCounter} (in Teil 1 ermittelt) abgezogen. Sobald das Ergebnis $"$0$"$ erreicht muss der Zähler zurückgesetzt werden.
 \\
-Beim Zurücksetzen wird zusätzlich mit "cpl A" die Bitmap zur Visualisierung bitweise invertiert um so die leuchtende Seite der LED-Matrix zu ändern.
+Beim Zurücksetzen wird zusätzlich mit $"$cpl A$"$ die Bitmap zur Visualisierung bitweise invertiert um so die leuchtende Seite der LED-Matrix zu ändern.
 
 \begin{figure}
 \begin{lstlisting}
