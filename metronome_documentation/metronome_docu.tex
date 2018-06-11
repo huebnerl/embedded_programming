@@ -10,6 +10,8 @@
 \usepackage{hyperref}
 \usepackage{xcolor}
 
+\usepackage{setspace}
+
 \input{listings.tex}
 \usepackage{tikz}
 \usetikzlibrary{positioning,calc,shapes,arrows,shapes.multipart}
@@ -36,6 +38,7 @@
 \ofoot{\pagemark}
 
 \begin{document}
+\begin{onehalfspace}
 
 \begin{titlepage}
 	\centering
@@ -123,10 +126,7 @@ Programmteil 1 besteht damit aus einer Schleife, die solange Zeitmessungen durch
 \\
 Nach dem genug Messungen durchgeführt wurden, kann die Summe der Zeitspannen durch die Anzahl (hier 3) geteilt werden, um so den mittleren Takt zu ermitteln. Diese Mittelwertrechnung ist deshalb wichtig, da der Mensch seinen Takt beim Drücken der Taste nicht konstant halten kann und so geringen Ungenauigkeiten entstehen.
 \\
-\\
 Durch die Mittelwertberechnung kann der Takt einfach gemittelt werden, um möglichst nah an den tatsächlichen Takt ran zu kommen. In \autoref{fig:pgmAblauf} ist der Programmablauf aus Programmteil 1 gezeigt.
-\\
-\\
 % Include flow chart definition
 \include{flow_diagram_definition}
 In Programmteil 2 kann der ermittelte Durchschnittswert genutzt werden, um den Takt mit Hilfe eines Timers auf der LED-Matrix zu visualisieren. Zur Visualisierung blinkt abwechselnd die linke und die rechte Hälfte der LED-Matrix auf. Dieses hin und her wechseln der Seiten erinnert somit an ein gewöhnliches Metronom.
@@ -163,12 +163,27 @@ ret
 \label{lst:timer}
 \end{figure}
 
+\newpage
 \section{Besondere Schwierigkeiten}
 Besondere Schwierigkeiten ergaben sich aufgrund der hohen Laufzeiten durch die Entwicklungsumgebung. Vorallem die Nutzung virtueller Hardware verlangsamt den Ablauf des Programms stark. So vergehen, auf einem recht leistungsstarken Rechner, etwa 7 Sekunden, bis im Simulator der Entwicklungsumgebung eine Millisekunde verstrichen ist. Da gutes Timing für ein Metronom sehr wichtig ist, musste entschieden werden, wie mit der langsamen Laufzeit umgegangen werden sollte. Da das Metronom nutzbar sein sollte wurde das Timing nicht an der simulierten Laufzeit der Entwicklungsumgebung orientiert. Da weder die Eingabe zur Festlegung des Taktes noch die Ausgabe des Takts über die LED-Matrix an die Zeit der Simulation gebunden sind, ist es einfach möglich, beides zu synchronisieren und so umzusetzten, dass das Metronom nutzbar ist.
 \\
 
 \section{Zusammenfassung}
 
-\section{Literatur}
+\newpage
 \section{Eidesstattliche Versicherung}
+
+Wir versicheren hiermit, dass wir unser {\arbeit} mit dem Thema: {\itshape \titel } selbstständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt haben. Wir versicheren zudem, dass die eingereichte elektronische Fassung mit der gedruckten Fassung übereinstimmt. 
+\\
+\\
+\\
+\\
+\vspace{3em}
+Karlsruhe, 29. Juni 2018
+\vspace{4em}
+\\
+\rule{10cm}{0.4pt}\\
+\autoren
+
+\end{onehalfspace}
 \end{document}
