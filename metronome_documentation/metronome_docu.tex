@@ -22,11 +22,11 @@
 
 \makeatletter
 
-\def \autoren {Felix Starke, Lars Hübner}
+\def \autoren {Felix Starke, Lars Hübner} % MATRIKELNUMMER
 \def \titel {Metronom für Intel 8051}
 \def \arbeit {Projekt Systemnahe Programmierung}
 \def \uni {DHBW Karlsruhe}
-\def \betreuer {Herr Lausen}
+\def \betreuer {Prof. Dr. Ralph Lausen}
 \def \datum {6. Juni 2018}
 
 \title{\titel}
@@ -172,11 +172,10 @@ ret
 Besondere Schwierigkeiten ergaben sich aufgrund der hohen Laufzeiten durch die Entwicklungsumgebung. Vorallem die Nutzung virtueller Hardware verlangsamt den Ablauf des Programms stark. So vergehen, auf einem recht leistungsstarken Rechner, etwa 7 Sekunden, bis im Simulator der Entwicklungsumgebung eine Millisekunde verstrichen ist. Da gutes Timing für ein Metronom sehr wichtig ist, musste entschieden werden, wie mit der langsamen Laufzeit umgegangen werden sollte. Da das Metronom nutzbar sein sollte wurde das Timing nicht an der simulierten Laufzeit der Entwicklungsumgebung orientiert. Da weder die Eingabe zur Festlegung des Taktes noch die Ausgabe des Takts über die LED-Matrix an die Zeit der Simulation gebunden sind, ist es einfach möglich, beides zu synchronisieren und so umzusetzten, dass das Metronom nutzbar ist.
 
 \section{Zusammenfassung}
-
+Das Metronom konnte vollständig funktionsfähig umgesetzt werden und erfüllt damit unsere Aufgabenstellung. Die Umsetzung dieses Projektes war eine ideale Möglichkeit, die Vorlesungsinhalte in der Praxis anzuwenden und zu vertiefen. So konnte der Umgang mit Mikrocontrollern gelernt und damit verbundene Schwierigkeiten erfahren werden. Der Einsatz der Entwicklungsumgebung mit Simulation bringt zwar ebenfalls Herausforderungen mit sich, ist aber dennoch eine sehr gute Wahl, da so schwerwiegendere Probleme, die bei der Verwendung von echter Hardware auftreten können, vermieden werden können.
 
 \newpage
 \section{Eidesstattliche Versicherung}
-
 Wir versicheren hiermit, dass wir unser {\arbeit} mit dem Thema: {\itshape \titel } selbstständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt haben. Wir versicheren zudem, dass die eingereichte elektronische Fassung mit der gedruckten Fassung übereinstimmt. 
 \\
 \\
