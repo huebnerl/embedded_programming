@@ -9,6 +9,9 @@
 \usepackage{listings}
 \usepackage{hyperref}
 
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc,shapes,arrows,shapes.multipart}
+
 \usepackage{scrpage2}
 \pagestyle{scrheadings}
 \clearscrheadfoot
@@ -58,7 +61,7 @@
 
 \section{Einleitung}
 \subsection{Motivation}
-Ein Metronom beschreibt ein mechanisches oder elektronisches gerät, welches zur regelmäßigen Tonerzeugung genutzt wird um musikalische Rhythmen zu unterstützen. Die Mehrzahl der neueren Metronome haben eine Funktion, bei der über ein regelmäßiges Klicken auf einen Button der entsprechende Klick-Takt übernommen wird.
+Ein Metronom beschreibt ein mechanisches oder elektronisches gerät, welches zur regelmäßigen Tonerzeugung genutzt wird um musikalische Rhythmen zu unterstützen. Die Mehrzahl der neueren Metronome haben eine Funktion, bei der über ein regelmäßiges Klicken auf einen Button der entsprechende Klick-Takt übernommen wird.	
 \\
 Da Metronome häufig als kleine portable Geräte mit geringem Stromverbrauch umgesetzt werden, kann eine entsprechende Funktionalität auf einem Intel 8051 Mikrocontroller implementiert werden. Die Programmierung auf diesem Mikrocomputer geschieht in Assembler. Ziel dieses Projektes ist entsprechend die Implementierung einer solchen "Tap to Beat" Funktion in Assembler für den 8051.
 
@@ -76,6 +79,9 @@ Da Metronome häufig als kleine portable Geräte mit geringem Stromverbrauch umg
 \section{Konzept}
 \subsection{Eingaben, Ausgaben und Ports}
 \subsection{Programmablauf}
+
+% Include flow chart definition
+\include{flow_diagram_definition}
 
 \section{Besondere Schwierigkeiten}
 
