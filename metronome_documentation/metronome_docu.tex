@@ -61,7 +61,8 @@
 
 \section{Einleitung}
 \subsection{Motivation}
-Ein Metronom beschreibt ein mechanisches oder elektronisches gerät, welches zur regelmäßigen Tonerzeugung genutzt wird um musikalische Rhythmen zu unterstützen. Die Mehrzahl der neueren Metronome haben eine Funktion, bei der über ein regelmäßiges Klicken auf einen Button der entsprechende Klick-Takt übernommen wird.	
+
+Ein Metronom beschreibt ein mechanisches oder elektronisches Gerät, welches zur regelmäßigen Tonerzeugung genutzt wird um musikalische Rhythmen zu unterstützen. Die Mehrzahl der neueren Metronome haben eine Funktion, bei der über ein regelmäßiges Klicken auf einen Button der entsprechende Klick-Takt übernommen wird.
 \\
 Da Metronome häufig als kleine portable Geräte mit geringem Stromverbrauch umgesetzt werden, kann eine entsprechende Funktionalität auf einem Intel 8051 Mikrocontroller implementiert werden. Die Programmierung auf diesem Mikrocomputer geschieht in Assembler. Ziel dieses Projektes ist entsprechend die Implementierung einer solchen "Tap to Beat" Funktion in Assembler für den 8051.
 
@@ -78,12 +79,20 @@ Da Metronome häufig als kleine portable Geräte mit geringem Stromverbrauch umg
 
 \section{Konzept}
 \subsection{Eingaben, Ausgaben und Ports}
+Um dem Metronom den Takt vorzugeben, kommt eine 4x4 Keypad-Matrix zur Eingabe zum Einsatz. Diese ist an alle acht Pins von Port 0 angeschlossen. Dabei werden die Pins 0-3 für die vier Spalten der Matrix und Pins 4-7 für die Zeilen der Matrix verwendet. % Maybe insert something here that explains how the damn thing works :)
+% Pic
+\\
+Für die Ausgabe des ermittelten Taktes wird eine 8x8 LED-Matrix verwendet. diese ist an die Ports 2 und 3 angeschlossen. Die acht Pins von Port 2 werden genutzt um die Spalten der Matrix anzusteuern, die acht Pins von Port 3 werden für die Zeilen der LED-Matrix verwendet. Eine der 64 LED's leuchtet genau dann, wenn sowohl der Pin der entsprechenden Zeile als auch der entsprechenden Spalte gesetzt sind.
+% Pic
+
 \subsection{Programmablauf}
 
 % Include flow chart definition
 \include{flow_diagram_definition}
 
 \section{Besondere Schwierigkeiten}
+Besondere Schwierigkeiten ergaben sich aufgrund der hohen Laufzeiten durch die Entwicklungsumgebung. Vorallem die Nutzung virtueller Hardware verlangsamt den Ablauf des Programms stark. So vergehen, auf einem recht leistungsstarken Rechner, etwa 7 Sekunden, bis im Simulator der Entwicklungsumgebung eine Millisekunde verstrichen ist. Da gutes Timing für ein Metronom sehr wichtig ist, musste entschieden werden, wie mit der langsamen Laufzeit umgegangen werden sollte. Da das Metronom nutzbar sein sollte wurde das Timing nicht an der simulierten Laufzeit der Entwicklungsumgebung orientiert. Da weder die Eingabe zur Festlegung des Taktes noch die Ausgabe des Takts über die LED-Matrix an die Zeit der Simulation gebunden sind, ist es einfach möglich, beides zu synchronisieren und so umzusetzten, dass das Metronom nutzbar ist.
+\\
 
 \section{Zusammenfassung}
 
