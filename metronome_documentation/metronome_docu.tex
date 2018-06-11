@@ -79,7 +79,7 @@ Da Metronome häufig als kleine portable Geräte mit geringem Stromverbrauch umg
 
 \section{Konzept}
 \subsection{Eingaben, Ausgaben und Ports}
-Um dem Metronom den Takt vorzugeben, kommt eine 4x4 Keypad-Matrix (siehe \autoref{fig:keypad}) zur Eingabe zum Einsatz. Diese ist an alle acht Pins von Port 0 angeschlossen. Dabei werden die Pins 0-3 für die vier Spalten der Matrix und Pins 4-7 für die Zeilen der Matrix verwendet. % Maybe insert something here that explains how the damn thing works :)
+Um dem Metronom den Takt vorzugeben, kommt eine 4x4 Keypad-Matrix (siehe \autoref{fig:keypad}) zur Eingabe zum Einsatz. Diese ist an alle acht Pins von Port 0 angeschlossen. Dabei werden die Pins 0-3 für die vier Spalten der Matrix und Pins 4-7 für die Zeilen der Matrix verwendet. Um eine gedrückte Teste zu detektieren müssen zunächst die Pins 0-3 auf "1" gesetzt werden und die Pins 4-7 gelesen werden. So lässt sich herausfinden, ob überhaupt eine Taste gedrückt ist und welcher Spalte diese angehört. Im nächsten Takt können dann die Pins 4-7 auf "1" gesetzt werden und 0-3 auf "0". Anschließend kann die Zeile der gedrückten Taste ermittelt werden.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.5\textwidth]{keypad.png}
