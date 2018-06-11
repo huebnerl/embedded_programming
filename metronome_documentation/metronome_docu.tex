@@ -16,13 +16,20 @@
 \usepackage{tikz}
 \usetikzlibrary{positioning,calc,shapes,arrows,shapes.multipart}
 
+\newcommand*{\quelle}{% 
+  \footnotesize Quelle: 
+} 
+
+
 \usepackage{scrpage2}
 \pagestyle{scrheadings}
 \clearscrheadfoot
 
 \makeatletter
 
-\def \autoren {Felix Starke, Lars Hübner} % MATRIKELNUMMER
+\def \autorenWithMatr {Felix Starke (Matr.: )\\
+ Lars Hübner (Matr.: 5485901)} % MATRIKELNUMMER
+\def \autoren {Felix Starke, Lars Hübner}
 \def \titel {Metronom für Intel 8051}
 \def \arbeit {Projekt Systemnahe Programmierung}
 \def \uni {DHBW Karlsruhe}
@@ -30,7 +37,7 @@
 \def \datum {6. Juni 2018}
 
 \title{\titel}
-\author{\autoren}
+\author{\autorenWithMatr}
 \date{\datum}
 
 \ihead{\titel}
@@ -49,7 +56,7 @@
 	\vspace{1.5cm}
 	{\huge\bfseries \titel\par}
 	\vspace{2cm}
-	{\Large\itshape \autoren\par}
+	{\Large\itshape \autorenWithMatr\par}
 	\vfill
 	betreut von\par
 	\textsc{\betreuer}
@@ -91,7 +98,14 @@ Nachdem der durchschnittliche Takt gemessen und ermittelt wurde, gilt es diesen 
 Assembler ist eine maschinenorientierte Programmiersprache, welche auf einem prozessorspezifischen Befehlssatz basiert. Die Sprache wird als Programmiersprache der zweiten Generation bezeichnet, da es nicht mehr notwendig ist, die Befehle als Binärcode zu schreiben. Statt dessen ist es möglich tatsächliche Befehle in Textform, wie zum Beispiel $"$ADD Op1, Op2$"$ zu verwenden. Assembler wird anschließend mit einem Assemblierer in den tatsächlichen Maschinencode übersetzt, welchen dann vom Prozessor ausgeführt wird.
 
 \subsection{Intel 8051 Mikrocontroller}
-Der Intel 8051 Mikrocontroller ist einer der am weitesten verbreiteten Mikrocontroller. Der 8051 ist ein 8-bit Mikrocontroller und kommt in verschiedensten Gebieten zum Einsatz. Dazu gehören beispielsweise die Automobilindustrie oder Anwendungen in der Robotik oder Telekommunikation. Der 8051 verfügt unter anderem über 4 KB Programmspeicher, 128 Byte Datenspeicher und zwei 16-Bit Timern. Des Weiteren existieren noch Varianten des 8051, die über besondere Komponenten wie beispielsweise UART verfügen und den Mikrocontroller entsprechend noch leistungsfähiger machen.
+Der Intel 8051 Mikrocontroller ist einer der am weitesten verbreiteten Mikrocontroller. Der 8051 ist ein 8-bit Mikrocontroller und kommt in verschiedensten Gebieten zum Einsatz. Dazu gehören beispielsweise die Automobilindustrie oder Anwendungen in der Robotik oder Telekommunikation. Er verfügt unter anderem über 4 KB Programmspeicher, 128 Byte Datenspeicher und zwei 16-Bit Timern. Des Weiteren existieren noch Varianten des Prozessors, die über besondere Komponenten wie beispielsweise UART verfügen und den Mikrocontroller entsprechend noch leistungsfähiger machen.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{8051.jpg}
+\caption{Intel 8051}
+\quelle\url{http://www.ne555.at/2014/images/stories/UC/Intel-P8051AH.jpg} 
+\label{fig:mcu}
+\end{figure}
 
 \subsection{Entwicklungsumgebung MCU-8051}
 Um eine einfachere und schnellere Entwicklung des Programmcodes zu ermöglichen wird zu Implementierung die MCU-8051 IDE verwendet. Diese IDE ermöglicht eine Virtualisierung der Hardware (des Intel 8051) sowie passende virtuelle Zusatzhardware für Eingaben und Ausgaben. \autoref{fig:mcu} zeigt die Entwicklungsumgebung.
@@ -171,11 +185,12 @@ ret
 \label{schwierigkeiten}
 Besondere Schwierigkeiten ergaben sich aufgrund der hohen Laufzeiten durch die Entwicklungsumgebung. Vorallem die Nutzung virtueller Hardware verlangsamt den Ablauf des Programms stark. So vergehen, auf einem recht leistungsstarken Rechner, etwa 7 Sekunden, bis im Simulator der Entwicklungsumgebung eine Millisekunde verstrichen ist. Da gutes Timing für ein Metronom sehr wichtig ist, musste entschieden werden, wie mit der langsamen Laufzeit umgegangen werden sollte. Da das Metronom nutzbar sein sollte wurde das Timing nicht an der simulierten Laufzeit der Entwicklungsumgebung orientiert. Da weder die Eingabe zur Festlegung des Taktes noch die Ausgabe des Takts über die LED-Matrix an die Zeit der Simulation gebunden sind, ist es einfach möglich, beides zu synchronisieren und so umzusetzten, dass das Metronom nutzbar ist.
 
+\newpage
 \section{Zusammenfassung}
-Das Metronom konnte vollständig funktionsfähig umgesetzt werden und erfüllt damit unsere Aufgabenstellung. Die Umsetzung dieses Projektes war eine ideale Möglichkeit, die Vorlesungsinhalte in der Praxis anzuwenden und zu vertiefen. So konnte der Umgang mit Mikrocontrollern gelernt und damit verbundene Schwierigkeiten erfahren werden. Der Einsatz der Entwicklungsumgebung mit Simulation bringt zwar ebenfalls Herausforderungen mit sich, ist aber dennoch eine sehr gute Wahl, da so schwerwiegendere Probleme, die bei der Verwendung von echter Hardware auftreten können, vermieden werden können.
+Das Metronom konnte vollständig funktionsfähig umgesetzt werden und erfüllt damit unsere Aufgabenstellung. Die Umsetzung dieses Projektes war eine ideale Möglichkeit, die Vorlesungsinhalte in der Praxis anzuwenden und zu vertiefen. So konnte der Umgang mit Mikrocontrollern und der Assemblerprogrammierung gelernt und damit verbundene Schwierigkeiten erfahren werden. Der Einsatz der Entwicklungsumgebung mit Simulation bringt zwar ebenfalls Herausforderungen mit sich, ist aber dennoch eine sehr gute Wahl, da so schwerwiegendere Probleme, die bei der Verwendung von echter Hardware auftreten können, vermieden werden können.
 
 \newpage
-\section{Eidesstattliche Versicherung}
+\section*{Eidesstattliche Versicherung}
 Wir versicheren hiermit, dass wir unser {\arbeit} mit dem Thema: {\itshape \titel } selbstständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt haben. Wir versicheren zudem, dass die eingereichte elektronische Fassung mit der gedruckten Fassung übereinstimmt. 
 \\
 \\
